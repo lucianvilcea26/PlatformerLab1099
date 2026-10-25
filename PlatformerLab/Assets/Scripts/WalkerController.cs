@@ -19,13 +19,13 @@ public class WalkerController : MonoBehaviour
     private bool jumpCutRequested;
     private bool isGrounded;
 
+    private static readonly int SpeedHash    = Animator.StringToHash("Speed");
+    private static readonly int GroundedHash = Animator.StringToHash("IsGrounded");
+
+    private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private InputAction moveAction;
-    private Animator animator;
-
-    private static readonly int SpeedHash = Animator.StringToHash("Speed");
-    private static readonly int GroundedHash = Animator.StringToHash("IsGrounded");
 
     void Awake()
     {
