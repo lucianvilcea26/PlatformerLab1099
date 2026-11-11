@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject endPanel;
     [SerializeField] private TMP_Text endTitle;
 
+    [SerializeField] private AudioClip winClip;
+    [SerializeField] private AudioClip loseClip;
+
     private int score;
     private bool gameOver;
 
@@ -49,12 +52,12 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied()
     {
-        EndGame("Game over");
+        EndGame("Game over", loseClip);
     }
 
     public void LevelComplete()
     {
-        EndGame("Level complete!");
+        EndGame("Level complete!", winClip);
     }
 
     public void Restart()
@@ -62,12 +65,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void EndGame(string title)
+    private void EndGame(string title, AudioClip clip)
     {
         if (gameOver) return;
         gameOver = true;
         endTitle.text = title;
         endPanel.SetActive(true);
+        AudioManager.Instance.PlaySfx(clip);
         Time.timeScale = 0f;
     }
 
